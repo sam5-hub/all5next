@@ -64,7 +64,7 @@ export default function CustomMDXEditor({
 
             {...props}
             ref={editorRef}
-            className="w-[90vw] h-96 max-h-screen border rounded-md  bg-white border-color-gray-300 dark:border-color-gray-700"
+            className="p-4 my-10 w-[90vw] border rounded-md  bg-white border-color-gray-300 dark:border-color-gray-700"
         />
     )
 }

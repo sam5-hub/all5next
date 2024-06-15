@@ -4,7 +4,7 @@ import BlogCard from "@/components/admin/blog-card";
 import { cn } from "@/lib/utils";
 import { useRouter } from "next/navigation";
 import { Button } from "@/components/ui/button";
-import { onGetBlogList } from "@/actions/blogs";
+import { onGetBlogPage } from "@/actions/blogs";
 import { BlogPaginationType, BlogType } from "@/schema/blogs.schema";
 import PaginationBar from "@/components/admin/pagination-bar";
 import { Loader } from "@/components/loader";
@@ -23,7 +23,7 @@ const BlogsPage = () => {
     setLoading(true);
     console.log("curPage: " + curPage);
     setCurrentPage(curPage);
-    const response = await onGetBlogList(curPage, perPage) as BlogPaginationType
+    const response = await onGetBlogPage(curPage, perPage) as BlogPaginationType
     if (!response) return;
     setData(response?.data as BlogType[]);
     setTotal(response.total);

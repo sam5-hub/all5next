@@ -3,34 +3,19 @@ import { prisma } from '@/lib/prisma';
 import { BlogType } from '@/schema/blogs.schema';
 
 
-export const onGetBlogList = async (page: number, perPage: number) => {
+export const onGetBlogList = async () => {
   try {
-    const userId = 1;
-
-    // Calculate the number of records to skip
-    const skip = (page - 1) * perPage;
-
-    // Fetch the paginated data
     const data = await prisma.blogs.findMany({
-      skip,
-      take: perPage,
       orderBy: {
         blog_id: 'desc',
       }
-      // where: {
-      //   userId, // assuming you want to filter blogs by userId
-      // },
     });
-
-
+   
     if (data) {
     
       return {
         status: 200,
         data,
-        total,
-        perPage,
-        currentPage: page,
       };
     }
   } catch (error) {
@@ -42,7 +27,7 @@ export const onGetBlogList = async (page: number, perPage: number) => {
   }
 };
 
-export const onGetBlogList = async (page: number, perPage: number) => {
+export const onGetBlogPage = async (page: number, perPage: number) => {
   try {
     const userId = 1;
 

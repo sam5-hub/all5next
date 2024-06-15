@@ -8,10 +8,29 @@ import NextTopLoader from "nextjs-toploader";
 const font = DM_Sans({ subsets: ['latin'] })
 
 export const metadata: Metadata = {
-  title: 'ALL5.Studio',
-  description: 'AI Your Work With ALL5.Studio.',
-  icons: ""
-}
+	metadataBase: new URL("https://all5.pro/"),
+
+	title: {
+		template: "%s | ALL5 Studio",
+		default: "ALL5 Studio",
+	},
+	authors: {
+		name: "Sam Wuu",
+	},
+
+	description:
+		"Explore a world of captivating stories and insightful articles on ALL5 Studio. From the latest trends to in-depth analyses, our blog covers a wide range of topics to keep you informed and entertained. Join our community of readers and discover thought-provoking content that sparks curiosity and fosters discussion. Stay updated with our diverse collection of blog posts, written by passionate contributors who share their expertise and unique perspectives. Engage with a platform that goes beyond the ordinary, providing you with enriching content that resonates with your interests.",
+	openGraph: {
+		title: "ALL5 Studio",
+		description:
+			"Explore a world of captivating stories and insightful articles on our blog. From the latest trends to in-depth analyses, our blog covers a wide range of topics to keep you informed and entertained. Join our community of readers and discover thought-provoking content that sparks curiosity and fosters discussion. Stay updated with our diverse collection of blog posts, written by passionate contributors who share their expertise and unique perspectives. Engage with a platform that goes beyond the ordinary, providing you with enriching content that resonates with your interests.",
+		url: "https://all5.pro/",
+		siteName: "ALL5 Studio",
+		images: "/seo/og.png",
+		type: "website",
+	},
+	keywords: ["Node JS", "Next JS", "Next AI"],
+};
 
 export default function RootLayout({
   children,
