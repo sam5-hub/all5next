@@ -17,15 +17,22 @@ type BlogCardProps = {
     imageUrl: string | 'https://placehold.co/400';
     description?: string;
     onClickHandler: (blog_id: string) => void;
-  };
+};
 
-  const BlogCard: React.FC<BlogCardProps> = ({ blog_id, title, imageUrl, description, onClickHandler }) => {
+const BlogCard: React.FC<BlogCardProps> = ({ blog_id, title, imageUrl, description, onClickHandler }) => {
     return (
 
         <Card className={"cursor-pointer"} onClick={() => onClickHandler(blog_id)}>
             <CardHeader>
-                <Image className={"aspect-square h-fit w-full rounded-xl mb-5 object-cover"}
-                    src={imageUrl} alt={title} width={300} height={150}/>
+                <div className="w-full mx-auto">
+                    <Image
+                        className="h-[200px] w-full rounded-xl mb-5 object-cover"
+                        src={imageUrl}
+                        alt={title}
+                        width={300}
+                        height={200}
+                    />
+                </div>
                 <CardTitle>{title}</CardTitle>
             </CardHeader>
             <CardFooter>

@@ -62,7 +62,11 @@ const ProjectsPage = () => {
           <Button variant={"outline"} onClick={() => fetchData(1)} className="ml-auto">Refresh</Button>
         </div>
       </div>
-      <div className={cn("mt-10 p-4 mb-20", "grid gap-5 grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 2xl:grid-cols-4 mt-10")}>
+      <div className={cn(
+        "mt-10 p-4 mb-20",
+        "grid gap-5",
+        "grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 xl:grid-cols-5 2xl:grid-cols-6"
+      )}>
         {loading ? <SkeletonLoader /> :
 
           data?.map((item, index) => {

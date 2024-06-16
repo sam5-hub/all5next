@@ -24,8 +24,15 @@ type ProjectCardProps = {
 
         <Card className={"cursor-pointer"} onClick={() => onClickHandler(project_id)}>
             <CardHeader>
-                <Image className={"aspect-square h-fit w-full rounded-xl mb-5 object-cover"}
-                    src={imageUrl} alt={title} width={300} height={150}/>
+            <div className="w-full mx-auto">
+                    <Image
+                        className="h-[200px] w-full rounded-xl mb-5 object-cover"
+                        src={imageUrl}
+                        alt={title}
+                        width={300}
+                        height={200}
+                    />
+                </div>
                 <CardTitle>{title}</CardTitle>
             </CardHeader>
             <CardFooter>

@@ -1,5 +1,4 @@
-"use client"; // Error components must be Client Components
-
+"use client"
 import { useEffect } from "react";
 
 export default function Error({
@@ -15,7 +14,7 @@ export default function Error({
 	}, [error]);
 
 	return (
-		<div className="flex flex-col justify-center item-center">
+		<div className="flex flex-col justify-center items-center gap-4 p-24">
 			<h1>Something went wrong!</h1>
 			<button
 				onClick={
