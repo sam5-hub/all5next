@@ -9,6 +9,7 @@ import dynamic from "next/dynamic";
 import { useMemo } from "react";
 import ImageUpload from '@/components/admin/image-upload';
 import CustomMDXEditor from '@/components/admin/mdx-editor';
+import TailwindEditor from '../admin/novel-editor';
 
 
 
@@ -40,6 +41,10 @@ const FormGenerator = ({
 
   const BlockEditor = useMemo(
     () => dynamic(() => import("@/components/admin/block-editor"), { ssr: false }),
+    []
+  );
+  const NovelEditor = useMemo(
+    () => dynamic(() => import("@/components/admin/novel-editor"), { ssr: false }),
     []
   );
   const mdref = React.useRef<any>(null);
@@ -163,9 +168,12 @@ const FormGenerator = ({
           htmlFor={`editor-${label}`}
         >
           {label && label}
-          <BlockEditor
-            onChangeBlock={(data) => {
-              formReturn.setValue(name, data);
+          <NovelEditor
+            onChangeBlock={(jsonContent,htmlContent) => {
+              formReturn.setValue(name, JSON.stringify(jsonContent));
+              console.log("jsonContent ",JSON.stringify(jsonContent))
+              console.log("htmlContent ",htmlContent)
+
             }}
             initialContent={formReturn.getValues(name)}
           />

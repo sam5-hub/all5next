@@ -2,10 +2,12 @@
 
 import { uploadFiles } from "@/utils/uploadthing";
 
-import type { BlockNoteEditor, PartialBlock } from "@blocknote/core";
+import { BlockNoteSchema, defaultStyleSpecs, type BlockNoteEditor, type PartialBlock } from "@blocknote/core";
 import { BlockNoteView, useCreateBlockNote } from "@blocknote/react";
 import "@blocknote/core/fonts/inter.css";
 import "@blocknote/react/style.css";
+import "@blocknote/core/fonts/inter.css";
+import "@blocknote/mantine/style.css";
 
 interface EditorProps {
   onChangeBlock: (content: String) => void;
@@ -13,11 +15,13 @@ interface EditorProps {
   editable?: boolean;
 }
 
+
 const Editor: React.FC<EditorProps> = ({
     onChangeBlock,
   initialContent,
   editable = true,
 }) => {
+
   const editor: BlockNoteEditor = useCreateBlockNote({
     initialContent: initialContent
       ? (JSON.parse(initialContent) as PartialBlock[])

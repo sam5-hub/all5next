@@ -24,7 +24,21 @@ export default function ProjectForm({
 
   return (
     <div>
-      <Button onClick={()=> getProjectDetail() } className="p-2 mb-10">Refresh</Button>
+      <div className="flex flex-row gap-4">
+        <Button variant={"outline"} onClick={() => getProjectDetail()} className="p-2 mb-10">Refresh</Button>
+        <Button variant={"outline"} onClick={() => { router.push("/blogs") }} > Back </Button>
+        <Button variant={"default"} onClick={() => { onSubmitProject(formMethod.getValues()); }}>
+          {loading ? (
+            <>
+              Please wait...
+            </>
+          ) : (
+            <>
+              Save
+            </>
+          )}
+        </Button>
+      </div>
 
       {
         loading ? <SkeletonLoader/> : 
@@ -58,32 +72,6 @@ export default function ProjectForm({
             placeholder="typing content"
             type="text"
           />
-  
-          <div className="mt-4 text-right flex flex-row gap-4">
-            <Button
-              variant={"secondary"}
-              onClick={() => {
-                router.push("/projects")
-              }}
-            >
-              Cancel
-            </Button>
-            <Button
-              variant={"default"}
-              onClick={() => {
-                onSubmitProject(formMethod.getValues());
-              }}>
-              {loading ? (
-                <>
-                  Please wait...
-                </>
-              ) : (
-                <>
-                  Save
-                </>
-              )}
-            </Button>
-          </div>
         </form>
       }
 
