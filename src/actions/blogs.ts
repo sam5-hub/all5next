@@ -7,7 +7,7 @@ export const onGetBlogList = async () => {
   try {
     const data = await prisma.blogs.findMany({
       orderBy: {
-        blog_id: 'desc',
+        blogId: 'desc',
       }
     });
    
@@ -39,7 +39,7 @@ export const onGetBlogPage = async (page: number, perPage: number) => {
       skip,
       take: perPage,
       orderBy: {
-        blog_id: 'desc',
+        blogId: 'desc',
       }
       // where: {
       //   userId, // assuming you want to filter blogs by userId
@@ -78,7 +78,7 @@ export const onGetBlogData = async (blogId: string) => {
       const userId = 1
       const data = await prisma.blogs.findUnique({
         where: {
-          blog_id: blogId,
+          blogId: blogId,
         },
       })
   
@@ -97,11 +97,11 @@ export const onGetBlogData = async (blogId: string) => {
   export const submitBlogData = async (blogData: BlogType) => {
   
     try {
-      if (blogData.blog_id) {
+      if (blogData.blogId) {
         // Update the existing blog
-        // const { blog_id, ...updateData } = blogData; // Destructure to exclude blog_id
+        // const { blogId, ...updateData } = blogData; // Destructure to exclude blogId
         const updatedData = await prisma.blogs.update({
-          where: { blog_id: blogData.blog_id },
+          where: { blogId: blogData.blogId },
           data: {
             ...blogData
            },

@@ -72,13 +72,13 @@ const ProjectsPage = () => {
           data?.map((item, index) => {
             return (
               <ProjectCard
-                key={item.project_id}
-                project_id={item.project_id}
+                key={item.projectId}
+                projectId={item.projectId}
                 title={item.title}
                 imageUrl={item.imageUrl}
                 description={item.title}
-                onClickHandler={(project_id) => {
-                  router.push(`/projects/edit/${project_id}`)
+                onClickHandler={(projectId) => {
+                  router.push(`/projects/edit/${projectId}`)
                 }
                 } />
 

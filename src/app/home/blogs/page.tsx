@@ -12,7 +12,7 @@ export default async function HomeBlogListPage() {
 		<div className="w-full grid grid-cols-1 md:grid-cols-3 gap-5 p-5 xl:p-0">
 			{blogs.map((blog, index) => (
 				<Link
-				href={"/home/blogs/" + blog.blog_id}
+				href={"/home/blogs/" + blog.blogId}
 				className="w-full  border rounded-md dark:bg-graident-dark p-5 hover:ring-2 ring-green-500 transition-all cursor-pointer space-y-5 first:lg:col-span-2 first:md:col-span-3"
 				key={index}
 				>

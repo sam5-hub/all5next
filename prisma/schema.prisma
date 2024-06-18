@@ -14,10 +14,11 @@ model User {
   updatedAt DateTime   @updatedAt
   blogs     Blogs[]
   projects  Projects[]
+  linkWorkspaces LinkWorkspace[]
 }
 
 model Blogs {
-  blog_id     String   @id @default(uuid())
+  blogId     String   @id @default(uuid())
   title       String?
   content     String?
   description String?
@@ -30,7 +31,7 @@ model Blogs {
 }
 
 model Projects {
-  project_id String   @id @default(uuid())
+  projectId String   @id @default(uuid())
   title      String?
   imageUrl   String?
   content    Json?
@@ -38,4 +39,43 @@ model Projects {
   updatedAt  DateTime @updatedAt
   userId     String?
   user       User?    @relation(fields: [userId], references: [id])
+}
+
+model LinkWorkspace {
+  linkWorkspaceId String   @id @default(uuid())
+  title      String?
+  type   String?
+  imageUrl   String?
+  createdAt  DateTime @default(now())
+  updatedAt  DateTime @updatedAt
+  userId     String?
+  user       User?    @relation(fields: [userId], references: [id])
+
+  links     Link[]
+  
+}
+
+model Link {
+  linkId String   @id @default(uuid())
+  title      String?
+  type   String?
+  url   String?
+  imageUrl   String?
+  content    String?
+  createdAt  DateTime @default(now())
+  updatedAt  DateTime @updatedAt
+  linkWorkspaceId     String?
+  linkWorkspace       LinkWorkspace?    @relation(fields: [linkWorkspaceId], references: [linkWorkspaceId])
+
+   linkTags     LinkTag[]
+  
+}
+
+model LinkTag {
+  linkTagId String @id @default(uuid())
+  tag        String
+  linkId     String
+  link       Link @relation(fields: [linkId], references: [linkId])
+  createdAt  DateTime @default(now())
+  updatedAt  DateTime @updatedAt
 }

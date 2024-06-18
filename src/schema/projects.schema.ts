@@ -1,7 +1,7 @@
 import { z } from 'zod'
 
 export type ProjectType = {
-    project_id: string;
+    projectId: string;
     title: string;
     imageUrl: string;
     content?: any; // Json is typically any type in TS
@@ -18,7 +18,7 @@ export type ProjectPaginationType ={
 
   // Zod schema for Project
 export const ProjectSchema = z.object({
-    project_id: z.string().uuid(),
+    projectId: z.string().uuid(),
     title: z.string(),
     imageUrl: z.string().optional(),
     content: z.any().optional(), // JSON can be any type

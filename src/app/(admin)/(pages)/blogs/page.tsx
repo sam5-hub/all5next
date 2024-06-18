@@ -71,13 +71,13 @@ const BlogsPage = () => {
           data?.map((item, index) => {
             return (
               <BlogCard
-                key={item.blog_id}
-                blog_id={item.blog_id}
+                key={item.blogId}
+                blogId={item.blogId}
                 title={item.title}
                 imageUrl={item.imageUrl}
                 description={item.title}
-                onClickHandler={(blog_id) => {
-                  router.push(`/blogs/edit/${blog_id}`)
+                onClickHandler={(blogId) => {
+                  router.push(`/blogs/edit/${blogId}`)
                 }
                 } />
 

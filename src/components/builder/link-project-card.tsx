@@ -11,20 +11,21 @@ import {
     CardTitle,
 } from "@/components/ui/card"
 
-type BlogCardProps = {
-    blogId: string;
+type LinkItemProps = {
+    linkId: string;
     title: string;
+    link: string;
     imageUrl: string | 'https://placehold.co/400';
-    description?: string;
-    onClickHandler: (blogId: string) => void;
-};
+    content?: string;
+    onClickHandler: (linkId: string) => void;
+  };
 
-const BlogCard: React.FC<BlogCardProps> = ({ blogId, title, imageUrl, description, onClickHandler }) => {
+  const ProjectCard: React.FC<LinkItemProps> = ({ projectId, title, imageUrl, description, onClickHandler }) => {
     return (
 
-        <Card className={"cursor-pointer"} onClick={() => onClickHandler(blogId)}>
+        <Card className={"cursor-pointer"} onClick={() => onClickHandler(projectId)}>
             <CardHeader>
-                <div className="w-full mx-auto">
+            <div className="w-full mx-auto">
                     <Image
                         className="h-[200px] w-full rounded-xl mb-5 object-cover"
                         src={imageUrl}
@@ -42,4 +43,4 @@ const BlogCard: React.FC<BlogCardProps> = ({ blogId, title, imageUrl, descriptio
     );
 };
 
-export default BlogCard;
+export default ProjectCard;

@@ -1,7 +1,7 @@
 import { z } from 'zod'
 
-export type BlogType = {
-    blogId: string;
+export type ProjectLinkType = {
+    link_id: string;
     title: string;
     imageUrl: string;
     content?: any; // Json is typically any type in TS

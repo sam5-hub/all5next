@@ -15,7 +15,7 @@ export const onGetProjectList = async (page: number, perPage: number) => {
       skip,
       take: perPage,
       orderBy: {
-        project_id: 'desc',
+        projectId: 'desc',
       }
       // where: {
       //   userId, // assuming you want to filter projects by userId
@@ -54,7 +54,7 @@ export const onGetProjectData = async (projectId: string) => {
       const userId = 1
       const data = await prisma.projects.findUnique({
         where: {
-          project_id: projectId,
+          projectId: projectId,
         },
       })
   
@@ -73,11 +73,11 @@ export const onGetProjectData = async (projectId: string) => {
   export const submitProjectData = async (projectData: ProjectType) => {
   
     try {
-      if (projectData.project_id) {
+      if (projectData.projectId) {
         // Update the existing blog
-        // const { project_id, ...updateData } = projectData; // Destructure to exclude project_id
+        // const { projectId, ...updateData } = projectData; // Destructure to exclude projectId
         const updatedData = await prisma.projects.update({
-          where: { project_id: projectData.project_id },
+          where: { projectId: projectData.projectId },
           data: {
             ...projectData
            },

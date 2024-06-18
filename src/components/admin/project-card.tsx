@@ -12,17 +12,17 @@ import {
 } from "@/components/ui/card"
 
 type ProjectCardProps = {
-    project_id: string;
+    projectId: string;
     title: string;
     imageUrl: string | 'https://placehold.co/400';
     description?: string;
-    onClickHandler: (project_id: string) => void;
+    onClickHandler: (projectId: string) => void;
   };
 
-  const ProjectCard: React.FC<ProjectCardProps> = ({ project_id, title, imageUrl, description, onClickHandler }) => {
+  const ProjectCard: React.FC<ProjectCardProps> = ({ projectId, title, imageUrl, description, onClickHandler }) => {
     return (
 
-        <Card className={"cursor-pointer"} onClick={() => onClickHandler(project_id)}>
+        <Card className={"cursor-pointer"} onClick={() => onClickHandler(projectId)}>
             <CardHeader>
             <div className="w-full mx-auto">
                     <Image
