@@ -14,7 +14,7 @@ model User {
   updatedAt DateTime   @updatedAt
   blogs     Blogs[]
   projects  Projects[]
-  linkWorkspaces LinkWorkspace[]
+  linkProjects LinkProject[]
 }
 
 model Blogs {
@@ -41,8 +41,8 @@ model Projects {
   user       User?    @relation(fields: [userId], references: [id])
 }
 
-model LinkWorkspace {
-  linkWorkspaceId String   @id @default(uuid())
+model LinkProject {
+  linkProjectId String   @id @default(uuid())
   title      String?
   type   String?
   imageUrl   String?
@@ -62,10 +62,11 @@ model Link {
   url   String?
   imageUrl   String?
   content    String?
+  sort   Int?
   createdAt  DateTime @default(now())
   updatedAt  DateTime @updatedAt
-  linkWorkspaceId     String?
-  linkWorkspace       LinkWorkspace?    @relation(fields: [linkWorkspaceId], references: [linkWorkspaceId])
+  linkProjectId     String?
+  linkProject       LinkProject?    @relation(fields: [linkProjectId], references: [linkProjectId])
 
    linkTags     LinkTag[]
   
@@ -74,6 +75,11 @@ model Link {
 model LinkTag {
   linkTagId String @id @default(uuid())
   tag        String
+  type   String?
+  url   String?
+  sort   Int?
+  xPosition   String?
+  yPosition   String?
   linkId     String
   link       Link @relation(fields: [linkId], references: [linkId])
   createdAt  DateTime @default(now())

@@ -10,37 +10,44 @@ import {
     CardHeader,
     CardTitle,
 } from "@/components/ui/card"
+import { Draggable } from 'react-beautiful-dnd';
+import { LinkType } from '@/schema/linkProjects.schema';
 
-type LinkItemProps = {
-    linkId: string;
-    title: string;
-    link: string;
-    imageUrl: string | 'https://placehold.co/400';
-    content?: string;
+type LinkItemCardProps = LinkType & {
+    index: number;
     onClickHandler: (linkId: string) => void;
   };
-
-  const ProjectCard: React.FC<LinkItemProps> = ({ projectId, title, imageUrl, description, onClickHandler }) => {
+  const LinkItemCard: React.FC<LinkItemCardProps> = ({ linkId, title, url, type, imageUrl, content, sort, createdAt, updatedAt, linkProjecId, index, onClickHandler }) => {
     return (
 
-        <Card className={"cursor-pointer"} onClick={() => onClickHandler(projectId)}>
-            <CardHeader>
-            <div className="w-full mx-auto">
-                    <Image
-                        className="h-[200px] w-full rounded-xl mb-5 object-cover"
-                        src={imageUrl}
-                        alt={title}
-                        width={300}
-                        height={200}
-                    />
-                </div>
-                <CardTitle>{title}</CardTitle>
-            </CardHeader>
-            <CardFooter>
-                <p>{description}</p>
-            </CardFooter>
-        </Card>
+        <Draggable draggableId={linkId} index={index}>
+            {(provided) => (
+                <Card
+                    className={"cursor-pointer"}
+                    onClick={() => onClickHandler(linkId)}
+                    ref={provided.innerRef}
+                    {...provided.draggableProps}
+                    {...provided.dragHandleProps}
+                >
+                    <CardHeader>
+                        <div className="w-full mx-auto">
+                            <Image
+                                className="h-[200px] w-full rounded-xl mb-5 object-cover"
+                                src={imageUrl}
+                                alt={title}
+                                width={300}
+                                height={200}
+                            />
+                        </div>
+                        <CardTitle>{title}</CardTitle>
+                    </CardHeader>
+                    <CardFooter>
+                        <p>{content}</p>
+                    </CardFooter>
+                </Card>
+            )}
+        </Draggable>
     );
 };
 
-export default ProjectCard;
+export default LinkItemCard;

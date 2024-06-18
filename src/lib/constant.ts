@@ -12,7 +12,7 @@ export const menuOptions = [
     { name: 'Dashboard', Component: Home, href: '/dashboard' },
     { name: 'Blogs', Component: Payment, href: '/blogs' },
     { name: 'Projects', Component: Logs, href: '/projects' },
-    { name: 'Connections', Component: Category, href: '/connections' },
+    { name: 'Link Projects', Component: Category, href: '/link-projects' },
     { name: 'Settings', Component: Settings, href: '/settings' },
     { name: 'Templates', Component: Templates, href: '/templates' },
     // { name: 'Logs', Component: Logs, href: '/logs' },
