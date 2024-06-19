@@ -3,37 +3,30 @@ import React, { useCallback, useEffect, useState } from "react";
 import BlogCard from "@/components/admin/blog-card";
 import { cn } from "@/lib/utils";
 import { useRouter } from "next/navigation";
-import { Button } from "@/components/ui/button";
-import { onGetBlogPage } from "@/actions/blogs";
-import { BlogPaginationType, BlogType } from "@/schema/blogs.schema";
-import PaginationBar from "@/components/admin/pagination-bar";
-import { Loader } from "@/components/loader";
+import { LinkProjectSchema, LinkProjectType } from "@/schema/linkProject.schema";
 import { SkeletonLoader } from "@/components/loader/skeleton-loader";
-import {
-  ResizableHandle,
-  ResizablePanel,
-  ResizablePanelGroup,
-} from "@/components/ui/resizable"
-import Image from 'next/image';
+import { onGetLinkProjectPage } from "@/actions/linkProjecs";
+import LinkProjectCard from "@/components/builder/link-project-card";
+
 
 const LinkProjectListPage = () => {
 
   const router = useRouter();
   const [loading, setLoading] = useState(false);
-  const [data, setData] = useState<BlogType[] | null>([]);
+  const [data, setData] = useState<LinkProjectType[] | null>([]);
   const [total, setTotal] = useState(0);
   const [perPage, setPerPage] = useState(10);
   const [currentPage, setCurrentPage] = useState(1);
 
-  // Get Blog
+  // Get ProjectLink
   const fetchData = async (curPage: number) => {
     setLoading(true);
     console.log("curPage: " + curPage);
     setCurrentPage(curPage);
-    const response = await onGetBlogPage(curPage, perPage) as BlogPaginationType
+    const response = await onGetLinkProjectPage(curPage, perPage)
     if (!response) return;
-    setData(response?.data as BlogType[]);
-    setTotal(response.total);
+    setData(response?.data as LinkProjectType[]);
+    setTotal(response.total || 0);
     setLoading(false);
   };
 
@@ -52,14 +45,12 @@ const LinkProjectListPage = () => {
 
           data?.map((item, index) => {
             return (
-              <BlogCard
-                key={item.blogId}
-                blogId={item.blogId}
-                title={item.title}
-                imageUrl={item.imageUrl}
-                description={item.title}
-                onClickHandler={(blogId) => {
-                  router.push(`/blogs/edit/${blogId}`)
+              <LinkProjectCard
+                key={item.linkProjectId}
+                index={index}
+                {...item}
+                onClickHandler={(linkProjectId) => {
+                  router.push(`/link-projects/${linkProjectId}`)
                 }
                 } />
 

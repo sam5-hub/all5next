@@ -11,13 +11,13 @@ import {
     CardTitle,
 } from "@/components/ui/card"
 import { Draggable } from 'react-beautiful-dnd';
-import { LinkType } from '@/schema/linkProjects.schema';
+import { LinkType } from '@/schema/linkProject.schema';
 
 type LinkItemCardProps = LinkType & {
     index: number;
     onClickHandler: (linkId: string) => void;
   };
-  const LinkItemCard: React.FC<LinkItemCardProps> = ({ linkId, title, url, type, imageUrl, content, sort, createdAt, updatedAt, linkProjecId, index, onClickHandler }) => {
+  const LinkItemCard: React.FC<LinkItemCardProps> = ({ linkId, title, url, type, imageUrl, content, sort, createdAt, updatedAt, linkProjectId, index, onClickHandler }) => {
     return (
 
         <Draggable draggableId={linkId} index={index}>
@@ -34,7 +34,7 @@ type LinkItemCardProps = LinkType & {
                             <Image
                                 className="h-[200px] w-full rounded-xl mb-5 object-cover"
                                 src={imageUrl}
-                                alt={title}
+                                alt={imageUrl}
                                 width={300}
                                 height={200}
                             />

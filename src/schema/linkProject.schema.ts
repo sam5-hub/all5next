@@ -2,7 +2,7 @@ import { z } from 'zod'
 
 // LinkProjectType
 export type LinkProjectType = {
-  linkProjecId: string;
+  linkProjectId: string;
   title: string;
   imageUrl: string;
   type?: string;
@@ -18,7 +18,7 @@ export type LinkProjectPaginationType = {
 }
 
 export const LinkProjectSchema = z.object({
-  linkProjecId: z.string().uuid(),
+  linkProjectId: z.string().uuid(),
   title: z.string(),
   imageUrl: z.string().optional(),
   type: z.string().optional(),
@@ -30,7 +30,7 @@ export const LinkProjectSchema = z.object({
 // LinkType
 export type LinkType = {
   linkId: string;
-  title: string;
+  title?: string;
   url: string;
   type?: string;
   imageUrl: string;
@@ -38,7 +38,7 @@ export type LinkType = {
   sort?: number;
   createdAt: Date;
   updatedAt: Date;
-  linkProjecId?: string;
+  linkProjectId?: string;
 }
 export const LinkSchema = z.object({
   linkId: z.string().uuid(),
@@ -50,7 +50,7 @@ export const LinkSchema = z.object({
   sort: z.number().optional(),
   createdAt: z.date(),
   updatedAt: z.date(),
-  linkProjecId: z.string().uuid().optional(),
+  linkProjectId: z.string().uuid().optional(),
 });
 
 // Link Tgas

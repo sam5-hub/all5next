@@ -9,8 +9,9 @@ datasource db {
 
 model User {
   id        String     @id @default(uuid())
-  name      String?
+  name      String
   createdAt DateTime   @default(now())
+  email      String
   updatedAt DateTime   @updatedAt
   blogs     Blogs[]
   projects  Projects[]
@@ -19,7 +20,7 @@ model User {
 
 model Blogs {
   blogId     String   @id @default(uuid())
-  title       String?
+  title       String
   content     String?
   description String?
   tags        String[]
@@ -32,7 +33,7 @@ model Blogs {
 
 model Projects {
   projectId String   @id @default(uuid())
-  title      String?
+  title      String
   imageUrl   String?
   content    Json?
   createdAt  DateTime @default(now())
@@ -43,7 +44,7 @@ model Projects {
 
 model LinkProject {
   linkProjectId String   @id @default(uuid())
-  title      String?
+  title      String
   type   String?
   imageUrl   String?
   createdAt  DateTime @default(now())
@@ -57,7 +58,7 @@ model LinkProject {
 
 model Link {
   linkId String   @id @default(uuid())
-  title      String?
+  title      String
   type   String?
   url   String?
   imageUrl   String?

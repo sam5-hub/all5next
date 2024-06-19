@@ -11,31 +11,21 @@ import LinkProjectBuilder from '@/components/builder/link-project-builder';
 import { usePathname, useRouter } from 'next/navigation';
 import { useToast } from '@/components/ui/use-toast';
 import { onGetLinkProjectData } from '@/actions/linkProjecs';
-import { LinkType } from '@/schema/linkProjects.schema';
+import { LinkProjectType, LinkType } from '@/schema/linkProject.schema';
+import { onGetLinkList } from '@/actions/links';
+import { LinkProject } from '@prisma/client';
 
-const LinkProjectDetailPage = ({ linkProjectId } : {
-  linkProjectId?: string | null 
-}) => {
+type Props = { params: { linkProjectId: string } }
 
-  const pathname = usePathname()
+const LinkProjectDetailPage = (prop : Props) => {
+
   const { toast } = useToast()
   const router = useRouter()
   const [loading, setLoading] = useState<boolean>(false)
-  const [linkList, setLinkList] = useState<LinkType[]>([])
 
-  const getLinkProjectDetail = useCallback(async () => {
-    setLoading(true);
-    const responseData = await onGetLinkProjectData(linkProjectId);
-      if (responseData && responseData.data) {
-        formMethod.reset(responseData.data as BlogType); // Set form values to fetched data
-      }
-    setLoading(false);
-  }, [blogId]);
-
-  useEffect(() => {
-    getBlogDetail();
-  }, [blogId]);
-
+  const pathname = usePathname();
+  // const linkProjectId = pathname.split('/').pop();
+  const linkProjectId = prop.params.linkProjectId;
   return (
     <div>
       <ResizablePanelGroup
@@ -55,9 +45,8 @@ const LinkProjectDetailPage = ({ linkProjectId } : {
         </ResizablePanel>
         <ResizableHandle withHandle />
         <ResizablePanel defaultSize={75}>
-          <div className="flex items-center justify-center p-6 h-[1000px]">
-            <p className="font-semibold">Operation</p>
-            <LinkProjectBuilder />
+          <div className="flex flex-col gap-4 items-center justify-center p-6 h-screen auto">
+            <LinkProjectBuilder linkProjectId={linkProjectId}/>
           </div>
         </ResizablePanel>
       </ResizablePanelGroup>

@@ -1,6 +1,7 @@
 "use client";
 import React from 'react';
 import Image from "next/image";
+import { LinkProjectSchema, LinkProjectType } from "@/schema/linkProject.schema";
 
 import {
     Card,
@@ -11,19 +12,15 @@ import {
     CardTitle,
 } from "@/components/ui/card"
 
-type LinkItemProps = {
-    linkId: string;
-    title: string;
-    link: string;
-    imageUrl: string | 'https://placehold.co/400';
-    content?: string;
+  type LinkProjectTypeProp = LinkProjectType & {
+    index: number;
     onClickHandler: (linkId: string) => void;
   };
 
-  const ProjectCard: React.FC<LinkItemProps> = ({ projectId, title, imageUrl, description, onClickHandler }) => {
+  const LinkProjectCard: React.FC<LinkProjectTypeProp> = ({ linkProjectId, title, type, imageUrl, createdAt, updatedAt, index, onClickHandler }) => {
     return (
 
-        <Card className={"cursor-pointer"} onClick={() => onClickHandler(projectId)}>
+        <Card className={"cursor-pointer"} onClick={() => onClickHandler(linkProjectId)}>
             <CardHeader>
             <div className="w-full mx-auto">
                     <Image
@@ -37,10 +34,10 @@ type LinkItemProps = {
                 <CardTitle>{title}</CardTitle>
             </CardHeader>
             <CardFooter>
-                <p>{description}</p>
+                <p>{type}</p>
             </CardFooter>
         </Card>
     );
 };
 
-export default ProjectCard;
+export default LinkProjectCard;

@@ -1,14 +1,18 @@
 'use server'
 import { prisma } from '@/lib/prisma';
-import { LinkType } from '@/schema/links.schema'
+import { LinkType } from '@/schema/linkProject.schema'
 
 
-export const onGetLinkList = async () => {
+export const onGetLinkList = async ( linkProjectId: string) => {
   try {
-    const data = await prisma.links.findMany({
+    const data = await prisma.link.findMany({
+      where: {
+        linkProjectId: linkProjectId
+      },
       orderBy: {
         linkId: 'desc',
       }
+
     });
    
     if (data) {
@@ -35,19 +39,19 @@ export const onGetLinkPage = async (page: number, perPage: number) => {
     const skip = (page - 1) * perPage;
 
     // Fetch the paginated data
-    const data = await prisma.links.findMany({
+    const data = await prisma.link.findMany({
       skip,
       take: perPage,
       orderBy: {
         linkId: 'desc',
       }
       // where: {
-      //   userId, // assuming you want to filter links by userId
+      //   userId, // assuming you want to filter link by userId
       // },
     });
 
-    // Fetch the total count of links
-    const total = await prisma.links.count({
+    // Fetch the total count of link
+    const total = await prisma.link.count({
       // where: {
       //   userId,
       // },
@@ -76,7 +80,7 @@ export const onGetLinkPage = async (page: number, perPage: number) => {
 export const onGetLinkData = async (linkId: string) => {
     try {
       const userId = 1
-      const data = await prisma.links.findUnique({
+      const data = await prisma.link.findUnique({
         where: {
           linkId: linkId,
         },
@@ -100,7 +104,7 @@ export const onGetLinkData = async (linkId: string) => {
     //   if (linkData.linkId) {
     //     // Update the existing link
     //     // const { linkId, ...updateData } = linkData; // Destructure to exclude linkId
-    //     const updatedData = await prisma.links.update({
+    //     const updatedData = await prisma.link.update({
     //       where: { linkId: linkData.linkId },
     //       data: {
     //         ...linkData
@@ -112,7 +116,7 @@ export const onGetLinkData = async (linkId: string) => {
     //     };
     //   } else {
     //     // Create a new link
-    //     const newData = await prisma.links.create({
+    //     const newData = await prisma.link.create({
     //       data: {
     //         ...linkData
     //       },
