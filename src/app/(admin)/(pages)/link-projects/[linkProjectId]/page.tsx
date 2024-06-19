@@ -45,9 +45,7 @@ const LinkProjectDetailPage = (prop : Props) => {
         </ResizablePanel>
         <ResizableHandle withHandle />
         <ResizablePanel defaultSize={75}>
-          <div className="flex flex-col gap-4 items-center justify-center p-6 h-screen auto">
-            <LinkProjectBuilder linkProjectId={linkProjectId}/>
-          </div>
+          <LinkProjectBuilder linkProjectId={linkProjectId}/>
         </ResizablePanel>
       </ResizablePanelGroup>
     </div>

@@ -10,7 +10,7 @@ export const onGetLinkList = async ( linkProjectId: string) => {
         linkProjectId: linkProjectId
       },
       orderBy: {
-        linkId: 'desc',
+        sort: 'asc',
       }
 
     });
@@ -99,38 +99,63 @@ export const onGetLinkData = async (linkId: string) => {
   
 
   export const submitLinkData = async (linkData: LinkType) => {
+    try {
+      if (linkData && linkData.linkId) {
+        // Update existing link
+        const updatedData = await prisma.link.update({
+          where: { linkId: linkData.linkId },
+          data: { ...linkData },
+        });
+        return {
+          status: 200,
+          data: updatedData,
+        };
+      } else {
+        // Create a new link
+        const newData = await prisma.link.create({
+          data: { ...linkData },
+        });
+        return {
+          status: 200,
+          data: newData,
+        };
+      }
+    } catch (error) {
+      console.log(error);
+      return {
+        status: 500,
+        error: 'An error occurred while saving the link',
+      };
+    }
+  };
+  export const submitLinkListData = async (linkList: LinkType[]) => {
+    try {
+      if (linkList && linkList.length > 0) {
+        // Update existing links
+        const updatePromises = linkList.map((link) =>
+          prisma.link.update({
+            where: { linkId: link.linkId },
+            data: { ...link },
+          })
+        );
   
-    // try {
-    //   if (linkData.linkId) {
-    //     // Update the existing link
-    //     // const { linkId, ...updateData } = linkData; // Destructure to exclude linkId
-    //     const updatedData = await prisma.link.update({
-    //       where: { linkId: linkData.linkId },
-    //       data: {
-    //         ...linkData
-    //        },
-    //     });
-    //     return {
-    //       status: 200,
-    //       data: updatedData,
-    //     };
-    //   } else {
-    //     // Create a new link
-    //     const newData = await prisma.link.create({
-    //       data: {
-    //         ...linkData
-    //       },
-    //     });
-    //     return {
-    //       status: 200,
-    //       data: newData,
-    //     };
-    //   }
-    // } catch (error) {
-    //   console.log(error);
-    //   return {
-    //     status: 500,
-    //     error: 'An error occurred while saving the link',
-    //   };
-    // }
+        const updatedData = await Promise.all(updatePromises);
+  
+        return {
+          status: 200,
+          data: updatedData,
+        };
+      } else {
+        return {
+          status: 400,
+          error: 'Link list is empty',
+        };
+      }
+    } catch (error) {
+      console.log(error);
+      return {
+        status: 500,
+        error: 'An error occurred while saving the links',
+      };
+    }
   };

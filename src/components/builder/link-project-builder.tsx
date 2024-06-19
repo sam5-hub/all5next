@@ -3,8 +3,7 @@ import { LinkType } from '@/schema/linkProject.schema';
 import React, { useCallback, useEffect, useState } from 'react';
 import { DragDropContext, Droppable } from 'react-beautiful-dnd';
 import LinkItemCard from './link-item-card';
-import { onGetLinkProjectData } from '@/actions/linkProjecs';
-import { onGetLinkList } from '@/actions/links';
+import { onGetLinkList, submitLinkListData } from '@/actions/links';
 
 function LinkProjectBuilder({ linkProjectId }: { linkProjectId: string }) {
     const [linkList, setLinkList] = React.useState<LinkType[]>([])
@@ -28,7 +27,7 @@ function LinkProjectBuilder({ linkProjectId }: { linkProjectId: string }) {
     }, [linkProjectId]);
 
 
-    const handleOnDragEnd = (result: any) => {
+    const handleOnDragEnd = async (result: any) => {
         if (!result.destination) {
             return;
         }
@@ -39,18 +38,23 @@ function LinkProjectBuilder({ linkProjectId }: { linkProjectId: string }) {
             item.sort = index;
         })
         setLinkList(items);
+
+        setLoading(true);
+        await submitLinkListData(items);
+        setLoading(false);
+
     }
 
     const onClickHandler = (linkId: string) => {
 
-        console.log("DragDropContext", linkId);
+        // console.log("DragDropContext", linkId);
     }
     return (
         <DragDropContext onDragEnd={handleOnDragEnd}>
-            <Droppable droppableId="link-lists" type="link-list">
+            <Droppable droppableId={`linkProjectId-${linkProjectId}`} type="link-list">
                 {(provided) => (
                     <div
-                        className='flex flex-col gap-2'
+                        className='flex flex-col gap-2 h-screen overflow-y-auto w-full p-4'
                         ref={provided.innerRef}
                         {...provided.droppableProps}>
                             {linkList.map((link, index) => (

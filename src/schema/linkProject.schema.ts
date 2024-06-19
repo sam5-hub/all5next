@@ -30,7 +30,7 @@ export const LinkProjectSchema = z.object({
 // LinkType
 export type LinkType = {
   linkId: string;
-  title?: string;
+  title: string;
   url: string;
   type?: string;
   imageUrl: string;

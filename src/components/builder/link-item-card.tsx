@@ -12,6 +12,7 @@ import {
 } from "@/components/ui/card"
 import { Draggable } from 'react-beautiful-dnd';
 import { LinkType } from '@/schema/linkProject.schema';
+import { Grip } from 'lucide-react';
 
 type LinkItemCardProps = LinkType & {
     index: number;
@@ -22,29 +23,26 @@ type LinkItemCardProps = LinkType & {
 
         <Draggable draggableId={linkId} index={index}>
             {(provided) => (
-                <Card
-                    className={"cursor-pointer"}
+                <div
+                    className={"cursor-pointer bg-black text-gray-100 border rounded-lg p-4 flex flex-row justify-between w-full"}
                     onClick={() => onClickHandler(linkId)}
                     ref={provided.innerRef}
                     {...provided.draggableProps}
-                    {...provided.dragHandleProps}
                 >
-                    <CardHeader>
-                        <div className="w-full mx-auto">
-                            <Image
-                                className="h-[200px] w-full rounded-xl mb-5 object-cover"
+                    
+                    <div className='flex flex-row gap-2' {...provided.dragHandleProps}>
+                        <Grip/>
+                        <div>{title}</div>
+                        {/* <Image
+                                className="mb-5 object-cover"
                                 src={imageUrl}
                                 alt={imageUrl}
-                                width={300}
-                                height={200}
-                            />
-                        </div>
-                        <CardTitle>{title}</CardTitle>
-                    </CardHeader>
-                    <CardFooter>
-                        <p>{content}</p>
-                    </CardFooter>
-                </Card>
+                                width={30}
+                                height={30}
+                        /> */}
+                    </div>
+                    <div>{content}</div>
+                </div>
             )}
         </Draggable>
     );
