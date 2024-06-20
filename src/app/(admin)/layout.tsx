@@ -1,6 +1,7 @@
 import React from 'react'
 import Sidebar from '@/components/sidebar'
 import InfoBar from '@/components/infobar'
+import { ThemeProvider } from '@/providers/theme-provider'
 
 type Props = { children: React.ReactNode }
 
@@ -13,6 +14,7 @@ const Layout = (props: Props) => {
         {props.children}
       </div>
     </div>
+
   )
 }
 

@@ -21,7 +21,7 @@ type LinkItemCardProps = LinkType & {
   const LinkItemCard: React.FC<LinkItemCardProps> = ({ linkId, title, url, type, imageUrl, content, sort, createdAt, updatedAt, linkProjectId, index, onClickHandler }) => {
     return (
 
-        <Draggable draggableId={linkId} index={index}>
+        <Draggable draggableId={linkId} index={index} disableInteractiveElementBlocking>
             {(provided) => (
                 <div
                     className={"cursor-pointer bg-black text-gray-100 border rounded-lg p-4 flex flex-row justify-between w-full"}
