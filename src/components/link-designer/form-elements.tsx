@@ -9,11 +9,12 @@
 // import { TextAreaFormElement } from "./fields/TextAreaField";
 import { TextFieldFormElement } from "@/components/fileds/TextField";
 import { TitleFieldFormElement } from "@/components/fileds/TitleField";
+import { SubTitleFieldFormElement } from "../fileds/SubTitleField";
 
 export type ElementsType =
   | "TextField"
   | "TitleField"
-  // | "SubTitleField"
+  | "SubTitleField"
   // | "ParagraphField"
   // | "SeparatorField"
   // | "SpacerField"
@@ -63,7 +64,7 @@ type FormElementsType = {
 export const FormElements: FormElementsType = {
   TextField: TextFieldFormElement,
   TitleField: TitleFieldFormElement,
-  // SubTitleField: SubTitleFieldFormElement,
+  SubTitleField: SubTitleFieldFormElement,
   // ParagraphField: ParagprahFieldFormElement,
   // SeparatorField: SeparatorFieldFormElement,
   // SpacerField: SpacerFieldFormElement,

@@ -4,6 +4,7 @@ import './globals.css'
 import { ThemeProvider } from '@/providers/theme-provider'
 import { Toaster } from '@/components/ui/sonner'
 import NextTopLoader from "nextjs-toploader";
+import { cn } from '@/lib/utils'
 
 const font = DM_Sans({ subsets: ['latin'] })
 
@@ -42,7 +43,7 @@ export default function RootLayout({
       <head>
         <link rel="icon" href="/icons/airbrakedotio.svg" sizes="any" />
       </head>
-    <body className={font.className}>
+    <body className={cn(font.className)}>
         
       <ThemeProvider
         attribute="class"

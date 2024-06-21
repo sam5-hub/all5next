@@ -3,7 +3,7 @@ import React, { useState } from "react";
 import { Draggable, DraggableProvided, DraggableStateSnapshot } from "react-beautiful-dnd";
 import { Button } from "@/components/ui/button";
 import { cn } from "@/lib/utils";
-import { FormElement } from "../fileds/form-elements";
+import { FormElement } from "../link-designer/form-elements";
 
 type SidebarBtnElementProps = {
   formElement: FormElement;

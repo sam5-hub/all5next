@@ -6,8 +6,9 @@ export type LinkProjectType = {
   title: string;
   imageUrl: string;
   type?: string;
-  createdAt: Date;
-  updatedAt: Date;
+  content: string;
+  createdAt?: Date;
+  updatedAt?: Date;
   userId?: string;
 }
 export type LinkProjectPaginationType = {

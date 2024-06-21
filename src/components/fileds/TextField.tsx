@@ -1,7 +1,7 @@
 "use client";
 
 import { MdTextFields } from "react-icons/md";
-import { ElementsType, FormElement, FormElementInstance, SubmitFunction } from "./form-elements";
+import { ElementsType, FormElement, FormElementInstance, SubmitFunction  } from "@/components/link-designer/form-elements";
 import { Label } from "@/components/ui/label";
 import { Input } from "@/components/ui/input";
 import { z } from "zod";
@@ -11,6 +11,7 @@ import { useEffect, useState } from "react";
 import { Form, FormControl, FormDescription, FormField, FormItem, FormLabel, FormMessage } from "@/components/ui/form";
 import { Switch } from "@/components/ui/switch";
 import { cn } from "@/lib/utils";
+import useLinkDesigner from "@/hooks/use-link-designer";
 
 const type: ElementsType = "TextField";
 
@@ -120,7 +121,7 @@ function FormComponent({
 type propertiesFormSchemaType = z.infer<typeof propertiesSchema>;
 function PropertiesComponent({ elementInstance }: { elementInstance: FormElementInstance }) {
   const element = elementInstance as CustomInstance;
-  // const { updateElement } = useDesigner();
+  const { updateElement } = useLinkDesigner();
   const form = useForm<propertiesFormSchemaType>({
     resolver: zodResolver(propertiesSchema),
     mode: "onBlur",
@@ -138,15 +139,15 @@ function PropertiesComponent({ elementInstance }: { elementInstance: FormElement
 
   function applyChanges(values: propertiesFormSchemaType) {
     const { label, helperText, placeHolder, required } = values;
-    // updateElement(element.id, {
-    //   ...element,
-    //   extraAttributes: {
-    //     label,
-    //     helperText,
-    //     placeHolder,
-    //     required,
-    //   },
-    // });
+    updateElement(element.id, {
+      ...element,
+      extraAttributes: {
+        label,
+        helperText,
+        placeHolder,
+        required,
+      },
+    });
   }
 
   return (

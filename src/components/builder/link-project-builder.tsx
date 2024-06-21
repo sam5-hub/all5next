@@ -4,7 +4,7 @@ import React, { useCallback, useEffect, useState } from 'react';
 import { DragDropContext, DropResult, Droppable } from 'react-beautiful-dnd';
 import LinkItemCard from './link-item-card';
 import { onGetLinkList, submitLinkListData } from '@/actions/links';
-import { FormElement, FormElements } from '../fileds/form-elements';
+import { FormElement, FormElements } from '../link-designer/form-elements';
 import { cn } from '@/lib/utils';
 import SidebarBtnElement, { SidebarBtnElementDragOverlay } from './link-builder-sidebar-btn';
 
