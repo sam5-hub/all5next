@@ -59,6 +59,8 @@ function LinkDesignerBuilderWorkspace({ linkProjectData }: { linkProjectData: Li
 
   return (
     <DndContext sensors={sensors}>
+
+        
       <main className="flex flex-col w-full min-h-screen">
         <nav className="flex justify-between border-b-2 p-4 gap-3 items-center">
           <h2 className="truncate font-medium">
