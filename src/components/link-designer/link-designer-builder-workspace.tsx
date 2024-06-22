@@ -23,9 +23,10 @@ import {
 } from "@/components/ui/resizable"
 import { LinkDesginerMobilePreview } from '@/components/link-designer/link-desginer-mobile-preview';
 import LinkDesignerSidebar from "./link-designer-sidebar";
+import ColorPicker from "../global/color-picker";
 // link-designer-builder-workspace
 function LinkDesignerBuilderWorkspace({ linkProjectData }: { linkProjectData: LinkProjectType }) {
-  const { setElements, setSelectedElement } = useLinkDesigner();
+  const { setElements, setSelectedElement, setThemeColor, themeColor } = useLinkDesigner();
   const [isReady, setIsReady] = useState(false);
 
   const mouseSensor = useSensor(MouseSensor, {
@@ -70,13 +71,13 @@ function LinkDesignerBuilderWorkspace({ linkProjectData }: { linkProjectData: Li
         className="w-full rounded-lg  border-b"
       >
 
-        <ResizablePanel defaultSize={15}>
+        <ResizablePanel defaultSize={12}>
         <LinkDesignerSidebar />
 
         </ResizablePanel>
         <ResizableHandle withHandle />
 
-        <ResizablePanel defaultSize={65}>
+        <ResizablePanel defaultSize={48}>
           <main className="flex flex-col w-full min-h-screen">
             <nav className="flex justify-between border-b-2 p-4 gap-3 items-center">
               <h2 className="truncate font-medium">
@@ -89,7 +90,13 @@ function LinkDesignerBuilderWorkspace({ linkProjectData }: { linkProjectData: Li
                 <LinkPublishButton id={linkProjectData.linkProjectId} />
               </div>
             </nav>
-            <div className="flex w-full flex-grow items-center justify-center relative overflow-y-auto h-[200px] bg-accent bg-[url(/builder/paper.svg)] dark:bg-[url(/builder/paper-dark.svg)]">
+            <div className="flex flex-col pt-10 h-screen w-full items-center justify-start relative overflow-y-auto bg-accent bg-[url(/builder/paper.svg)] dark:bg-[url(/builder/paper-dark.svg)]">
+
+              <ColorPicker onCallback ={(hex)=> {
+                console.log("ColorPicker hex",hex);
+                setThemeColor(hex);
+              }}/>
+              
               <LinkDesignerBuilder linkProjectId="A01" />
             </div>
           </main>
@@ -97,7 +104,7 @@ function LinkDesignerBuilderWorkspace({ linkProjectData }: { linkProjectData: Li
         </ResizablePanel>
         <ResizableHandle withHandle />
 
-        <ResizablePanel defaultSize={20}>
+        <ResizablePanel defaultSize={40}>
           <LinkDesginerMobilePreview />
         </ResizablePanel>
 

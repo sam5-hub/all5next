@@ -10,7 +10,10 @@ type Props = {
     id?: string
 }
 export function LinkDesginerMobilePreview(props: Props) {
-    const { elements } = useLinkDesigner();
+    const { elements, themeColor } = useLinkDesigner();
+    const bgThemeColor = `${themeColor}`
+
+    console.log("bgThemeColor",bgThemeColor);
 
     return (
 
@@ -23,7 +26,9 @@ export function LinkDesginerMobilePreview(props: Props) {
             
             <div className={cn("absolute z-10 top-1/2 left-1/2 w-80 h-[600px] overflow-y-auto transform -translate-x-1/2 -translate-y-1/2"
                 , "flex flex-col justify-center items-center")}>
-                <div className="max-w-[620px] flex flex-col gap-4 flex-grow bg-background h-full w-full rounded-2xl p-2 overflow-y-auto">
+                <div className={cn("max-w-[620px] flex flex-col gap-4 flex-grow bg-[#3f1c5f] h-full w-full rounded-2xl p-2 overflow-y-auto",
+                )} style={{ backgroundColor: bgThemeColor }}
+                >
                     <Image src="/seo/og.png" height={100} width={372} alt={'cover'} className='object-cover' />
                     {elements.map((element) => {
                         const FormComponent = FormElements[element.type].formComponent;

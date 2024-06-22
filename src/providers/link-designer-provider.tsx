@@ -13,12 +13,17 @@ type LinkDesignerContextType = {
     setSelectedElement: Dispatch<SetStateAction<FormElementInstance | null>>;
 
     updateElement: (id: string, element: FormElementInstance) => void;
+
+    // theme
+    themeColor: string  | null;
+    setThemeColor: Dispatch<SetStateAction<string>>;
 };
 export const LinkDesignerContext = createContext<LinkDesignerContextType | null>(null);
 
 export default function LinkDesignerContextProvider({ children }: { children: ReactNode }) {
     const [elements, setElements] = useState<FormElementInstance[]>([]);
     const [selectedElement, setSelectedElement] = useState<FormElementInstance | null>(null);
+    const [themeColor, setThemeColor] = useState<string | null>(null);
 
     const addElement = (index: number, element: FormElementInstance) => {
         setElements((prev) => {
@@ -54,6 +59,8 @@ export default function LinkDesignerContextProvider({ children }: { children: Re
                 setSelectedElement,
 
                 updateElement,
+                themeColor,
+                setThemeColor
             }}
         >
             {children}

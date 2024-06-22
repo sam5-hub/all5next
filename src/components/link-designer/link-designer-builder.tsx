@@ -121,7 +121,7 @@ function LinkDesignerBuilder({ linkProjectId }: { linkProjectId: string }) {
 
 
     <div
-      className="p-4 w-full h-[80vh] overflow-auto-y"
+      className="p-4 w-full h-[70vh] overflow-auto-y"
       onClick={() => {
         if (selectedElement) setSelectedElement(null);
       }}
