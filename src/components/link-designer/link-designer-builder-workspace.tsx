@@ -74,7 +74,7 @@ function LinkDesignerBuilderWorkspace({ linkProjectData }: { linkProjectData: Li
           </div>
         </nav>
         <div className="flex w-full flex-grow items-center justify-center relative overflow-y-auto h-[200px] bg-accent bg-[url(/builder/paper.svg)] dark:bg-[url(/builder/paper-dark.svg)]">
-          <LinkDesignerBuilder linkProjectId="TEST"/>
+          <LinkDesignerBuilder linkProjectId="A01"/>
         </div>
       </main>
       <LinkDesignerDragOverlayWrapper />

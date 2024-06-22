@@ -11,7 +11,22 @@ import { TextFieldFormElement } from "@/components/fileds/TextField";
 import { TitleFieldFormElement } from "@/components/fileds/TitleField";
 import { SubTitleFieldFormElement } from "../fileds/SubTitleField";
 
+
+import { FacebookFieldFormElement } from "@/components/fileds/FacebookField";
+import { InstagramFieldFormElement } from "@/components/fileds/InstagramField";
+import { TwitterFieldFormElement } from "@/components/fileds/TwitterField";
+import { TiktokFieldFormElement } from "@/components/fileds/TiktokField";
+import { GithubFieldFormElement } from "@/components/fileds/GithubField";
+import { YoutubeFieldFormElement } from "@/components/fileds/YoutubeField";
+
 export type ElementsType =
+  | "FacebookField"
+  | "InstagramField"
+  | "TwitterField"
+  | "TiktokField"
+  | "GithubField"
+  | "YoutubeField"
+
   | "TextField"
   | "TitleField"
   | "SubTitleField"
@@ -62,6 +77,13 @@ type FormElementsType = {
   [key in ElementsType]: FormElement;
 };
 export const FormElements: FormElementsType = {
+  FacebookField: FacebookFieldFormElement,
+  InstagramField: InstagramFieldFormElement,
+  TwitterField: TwitterFieldFormElement,
+  TiktokField: TiktokFieldFormElement,
+  GithubField: GithubFieldFormElement,
+  YoutubeField: YoutubeFieldFormElement,
+
   TextField: TextFieldFormElement,
   TitleField: TitleFieldFormElement,
   SubTitleField: SubTitleFieldFormElement,

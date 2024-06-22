@@ -11,7 +11,7 @@ import { AiOutlineClose } from "react-icons/ai";
 function LinkDesignerSidebar() {
   const { selectedElement } = useLinkDesigner();
   return (
-    <aside className="w-[400px] max-w-[400px] flex flex-col flex-grow gap-2 border-l-2 border-muted p-4 bg-background overflow-y-auto h-full">
+    <aside className="w-full flex flex-col flex-grow gap-2 border-l-2 border-muted p-4 bg-background overflow-y-auto h-full">
       {!selectedElement && <FormElementsSidebar />}
       {selectedElement && <PropertiesFormSidebar />}
     </aside>
@@ -27,12 +27,13 @@ function FormElementsSidebar() {
         <p className="text-sm text-foreground/70">Drag and drop elements</p>
         <Separator className="my-2" />
         <div className="grid grid-cols-1 md:grid-cols-2 gap-2 place-items-center">
-          <p className="text-sm text-muted-foreground col-span-1 md:col-span-2 my-2 place-self-start">Layout elements</p>
-          <LinkDesignerSidebarItem formElement={FormElements.TitleField} />
-          <LinkDesignerSidebarItem formElement={FormElements.SubTitleField} />
-          {/* <LinkDesignerSidebarItem formElement={FormElements.ParagraphField} />
-          <LinkDesignerSidebarItem formElement={FormElements.SeparatorField} />
-          <LinkDesignerSidebarItem formElement={FormElements.SpacerField} /> */}
+          <p className="text-sm text-muted-foreground col-span-1 md:col-span-2 my-2 place-self-start">Social elements</p>
+          <LinkDesignerSidebarItem formElement={FormElements.FacebookField} />
+          <LinkDesignerSidebarItem formElement={FormElements.InstagramField} />
+          <LinkDesignerSidebarItem formElement={FormElements.TwitterField} />
+          <LinkDesignerSidebarItem formElement={FormElements.TiktokField} />
+          <LinkDesignerSidebarItem formElement={FormElements.YoutubeField} />
+          <LinkDesignerSidebarItem formElement={FormElements.GithubField} />
   
           <p className="text-sm text-muted-foreground col-span-1 md:col-span-2 my-2 place-self-start">Form elements</p>
           <LinkDesignerSidebarItem formElement={FormElements.TextField} />
@@ -41,6 +42,11 @@ function FormElementsSidebar() {
           <SidebarBtnElement formElement={FormElements.DateField} />
           <SidebarBtnElement formElement={FormElements.SelectField} />
           <SidebarBtnElement formElement={FormElements.CheckboxField} /> */}
+
+          <p className="text-sm text-muted-foreground col-span-1 md:col-span-2 my-2 place-self-start">Layout elements</p>
+          <LinkDesignerSidebarItem formElement={FormElements.TitleField} />
+          <LinkDesignerSidebarItem formElement={FormElements.SubTitleField} />
+
         </div>
       </div>
     );

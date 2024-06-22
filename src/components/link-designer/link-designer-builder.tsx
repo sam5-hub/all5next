@@ -10,7 +10,11 @@ import { BiSolidTrash } from "react-icons/bi";
 import LinkDesignerBuilderElement from "./link-designer-builder-element";
 import LinkDesignerSidebar from "./link-designer-sidebar";
 import { ElementsType, FormElements } from "./form-elements";
-
+import {
+  ResizableHandle,
+  ResizablePanel,
+  ResizablePanelGroup,
+} from "@/components/ui/resizable"
 
 function LinkDesignerBuilder({ linkProjectId }: { linkProjectId: string }) {
   const { elements, addElement, selectedElement, setSelectedElement, removeElement } = useLinkDesigner();
@@ -46,7 +50,7 @@ function LinkDesignerBuilder({ linkProjectId }: { linkProjectId: string }) {
       const isTopHalfLinkDesignerBuilderElementDrop = over.data?.current?.isTopHalfLinkDesignerBuilderElement;
       const isBottomLinkDesignerBuilderElementDrop = over.data?.current?.isBottomLinkDesignerBuilderElement;
       const isDroppingOverDesignerElement =
-      isTopHalfLinkDesignerBuilderElementDrop || isBottomLinkDesignerBuilderElementDrop;
+        isTopHalfLinkDesignerBuilderElementDrop || isBottomLinkDesignerBuilderElementDrop;
 
       const droppingSidebarBtnOverDesignerElement = isLinkDesignerSidebarItem && isDroppingOverDesignerElement;
 
@@ -107,40 +111,50 @@ function LinkDesignerBuilder({ linkProjectId }: { linkProjectId: string }) {
 
 
   return (
-    <div className="flex w-full h-full">
-      <div
-        className="p-4 w-full"
-        onClick={() => {
-          if (selectedElement) setSelectedElement(null);
-        }}
-      >
-        <div
-          ref={droppable.setNodeRef}
-          className={cn(
-            "bg-background max-w-[920px] h-full m-auto rounded-xl flex flex-col flex-grow items-center justify-start flex-1 overflow-y-auto",
-            droppable.isOver && "ring-4 ring-primary ring-inset",
-          )}
-        >
-          {!droppable.isOver && elements.length === 0 && (
-            <p className="text-3xl text-muted-foreground flex flex-grow items-center font-bold">Drop here</p>
-          )}
 
-          {droppable.isOver && elements.length === 0 && (
-            <div className="p-4 w-full">
-              <div className="h-[120px] rounded-md bg-primary/20"></div>
-            </div>
-          )}
-          {elements.length > 0 && (
-            <div className="flex flex-col  w-full gap-2 p-4">
-              {elements.map((element) => (
-                <LinkDesignerBuilderElement key={element.id} element={element} />
-              ))}
-            </div>
-          )}
+
+    <ResizablePanelGroup
+      direction="horizontal"
+      className="w-full rounded-lg  border-b"
+    >
+      <ResizablePanel defaultSize={80}>
+        <div
+          className="p-4 w-full h-[80vh] overflow-auto-y"
+          onClick={() => {
+            if (selectedElement) setSelectedElement(null);
+          }}
+        >
+          <div
+            ref={droppable.setNodeRef}
+            className={cn(
+              "bg-background max-w-[920px] h-full m-auto rounded-xl flex flex-col flex-grow items-center justify-start flex-1 overflow-y-auto",
+              droppable.isOver && "ring-4 ring-primary ring-inset",
+            )}
+          >
+            {!droppable.isOver && elements.length === 0 && (
+              <p className="text-3xl text-muted-foreground flex flex-grow items-center font-bold">Drop here</p>
+            )}
+
+            {droppable.isOver && elements.length === 0 && (
+              <div className="p-4 w-full">
+                <div className="h-[120px] rounded-md bg-primary/20"></div>
+              </div>
+            )}
+            {elements.length > 0 && (
+              <div className="flex flex-col  w-full gap-2 p-4">
+                {elements.map((element) => (
+                  <LinkDesignerBuilderElement key={element.id} element={element} />
+                ))}
+              </div>
+            )}
+          </div>
         </div>
-      </div>
-      <LinkDesignerSidebar />
-    </div>
+      </ResizablePanel>
+      <ResizableHandle withHandle />
+      <ResizablePanel defaultSize={20}>
+        <LinkDesignerSidebar />
+      </ResizablePanel>
+    </ResizablePanelGroup>
   );
 }
 export default LinkDesignerBuilder;
