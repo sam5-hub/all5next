@@ -16,7 +16,13 @@ import LinkPreviewButton from "./link-preview-button";
 import LinkSaveButton from "./link-save-button";
 import LinkPublishButton from "./link-publish-button";
 import { LinkProjectType } from "@/schema/linkProject.schema";
-
+import {
+  ResizableHandle,
+  ResizablePanel,
+  ResizablePanelGroup,
+} from "@/components/ui/resizable"
+import { LinkDesginerMobilePreview } from '@/components/link-designer/link-desginer-mobile-preview';
+import LinkDesignerSidebar from "./link-designer-sidebar";
 // link-designer-builder-workspace
 function LinkDesignerBuilderWorkspace({ linkProjectData }: { linkProjectData: LinkProjectType }) {
   const { setElements, setSelectedElement } = useLinkDesigner();
@@ -37,47 +43,67 @@ function LinkDesignerBuilderWorkspace({ linkProjectData }: { linkProjectData: Li
 
   const sensors = useSensors(mouseSensor, touchSensor);
 
-//   useEffect(() => {
-//     if (isReady) return;
-//     const elements = JSON.parse("{}") //linkProjectData.content
-//     setElements(elements);
-//     setSelectedElement(null);
-//     const readyTimeout = setTimeout(() => setIsReady(true), 500);
-//     return () => clearTimeout(readyTimeout);
-//   }, [linkProjectData, setElements, isReady, setSelectedElement]);
+  //   useEffect(() => {
+  //     if (isReady) return;
+  //     const elements = JSON.parse("{}") //linkProjectData.content
+  //     setElements(elements);
+  //     setSelectedElement(null);
+  //     const readyTimeout = setTimeout(() => setIsReady(true), 500);
+  //     return () => clearTimeout(readyTimeout);
+  //   }, [linkProjectData, setElements, isReady, setSelectedElement]);
 
-//   if (!isReady) {
-//     return (
-//       <div className="flex flex-col items-center justify-center w-full h-full">
-//         <ImSpinner2 className="animate-spin h-12 w-12" />
-//       </div>
-//     );
-//   }
+  //   if (!isReady) {
+  //     return (
+  //       <div className="flex flex-col items-center justify-center w-full h-full">
+  //         <ImSpinner2 className="animate-spin h-12 w-12" />
+  //       </div>
+  //     );
+  //   }
 
-//   const shareUrl = `${window.location.origin}/submit/${form.shareURL}`;
+  //   const shareUrl = `${window.location.origin}/submit/${form.shareURL}`;
 
 
   return (
     <DndContext sensors={sensors}>
+      <ResizablePanelGroup
+        direction="horizontal"
+        className="w-full rounded-lg  border-b"
+      >
 
-        
-      <main className="flex flex-col w-full min-h-screen">
-        <nav className="flex justify-between border-b-2 p-4 gap-3 items-center">
-          <h2 className="truncate font-medium">
-            <span className="text-muted-foreground mr-2">Link Projec :</span>
-            {linkProjectData.title}
-          </h2>
-          <div className="flex items-center gap-2">
-            <LinkPreviewButton />
-            <LinkSaveButton id={linkProjectData.linkProjectId} />
-            <LinkPublishButton id={linkProjectData.linkProjectId} />
-          </div>
-        </nav>
-        <div className="flex w-full flex-grow items-center justify-center relative overflow-y-auto h-[200px] bg-accent bg-[url(/builder/paper.svg)] dark:bg-[url(/builder/paper-dark.svg)]">
-          <LinkDesignerBuilder linkProjectId="A01"/>
-        </div>
-      </main>
-      <LinkDesignerDragOverlayWrapper />
+        <ResizablePanel defaultSize={15}>
+        <LinkDesignerSidebar />
+
+        </ResizablePanel>
+        <ResizableHandle withHandle />
+
+        <ResizablePanel defaultSize={65}>
+          <main className="flex flex-col w-full min-h-screen">
+            <nav className="flex justify-between border-b-2 p-4 gap-3 items-center">
+              <h2 className="truncate font-medium">
+                <span className="text-muted-foreground mr-2">Link Projec :</span>
+                {linkProjectData.title}
+              </h2>
+              <div className="flex items-center gap-2">
+                <LinkPreviewButton />
+                <LinkSaveButton id={linkProjectData.linkProjectId} />
+                <LinkPublishButton id={linkProjectData.linkProjectId} />
+              </div>
+            </nav>
+            <div className="flex w-full flex-grow items-center justify-center relative overflow-y-auto h-[200px] bg-accent bg-[url(/builder/paper.svg)] dark:bg-[url(/builder/paper-dark.svg)]">
+              <LinkDesignerBuilder linkProjectId="A01" />
+            </div>
+          </main>
+          <LinkDesignerDragOverlayWrapper />
+        </ResizablePanel>
+        <ResizableHandle withHandle />
+
+        <ResizablePanel defaultSize={20}>
+          <LinkDesginerMobilePreview />
+        </ResizablePanel>
+
+      </ResizablePanelGroup>
+
+
     </DndContext>
   );
 }

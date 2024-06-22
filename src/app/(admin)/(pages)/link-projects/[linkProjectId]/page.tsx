@@ -21,7 +21,7 @@ import { LinkDesginerMobilePreview } from '@/components/link-designer/link-desgi
 
 type Props = { params: { linkProjectId: string } }
 
-const LinkProjectDetailPage = (prop : Props) => {
+const LinkProjectDetailPage = (prop: Props) => {
 
   const { toast } = useToast()
   const router = useRouter()
@@ -38,20 +38,8 @@ const LinkProjectDetailPage = (prop : Props) => {
 
   };
   return (
-    <div>
-       {/* <LinkDesignerBuilderWorkspace linkProjectData={linkProjectData}/> */}
-      <ResizablePanelGroup
-        direction="horizontal"
-        className="w-full rounded-lg  border-b"
-      >
-        <ResizablePanel defaultSize={25}>
-          <LinkDesginerMobilePreview />
-        </ResizablePanel>
-        <ResizableHandle withHandle />
-        <ResizablePanel defaultSize={75}>
-          <LinkDesignerBuilderWorkspace linkProjectData={linkProjectData}/>
-        </ResizablePanel>
-      </ResizablePanelGroup>  
+    <div className='w-full h-screen'>
+      <LinkDesignerBuilderWorkspace linkProjectData={linkProjectData} />
     </div>
   )
 }
