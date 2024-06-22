@@ -15,9 +15,10 @@ import {
   ResizablePanel,
   ResizablePanelGroup,
 } from "@/components/ui/resizable"
+import { arrayMove, SortableContext, verticalListSortingStrategy } from '@dnd-kit/sortable';
 
 function LinkDesignerBuilder({ linkProjectId }: { linkProjectId: string }) {
-  const { elements, addElement, selectedElement, setSelectedElement, removeElement } = useLinkDesigner();
+  const { elements, setElements, addElement, selectedElement, setSelectedElement, removeElement } = useLinkDesigner();
   const droppable = useDroppable({
     id: "link-designer-builder-drop-area",
     data: {
@@ -101,6 +102,13 @@ function LinkDesignerBuilder({ linkProjectId }: { linkProjectId: string }) {
         }
 
         addElement(indexForNewElement, activeElement);
+      } else if (active.id !== over.id) {
+        setElements((items) => {
+          const oldIndex = items.findIndex((item) => item.id === active.id);
+          const newIndex = items.findIndex((item) => item.id === over.id);
+  
+          return arrayMove(items, oldIndex, newIndex);
+        });
       }
     },
   });
@@ -142,9 +150,12 @@ function LinkDesignerBuilder({ linkProjectId }: { linkProjectId: string }) {
             )}
             {elements.length > 0 && (
               <div className="flex flex-col  w-full gap-2 p-4">
-                {elements.map((element) => (
-                  <LinkDesignerBuilderElement key={element.id} element={element} />
-                ))}
+                <SortableContext items={elements} strategy={verticalListSortingStrategy}>
+                  {elements.map((element) => (
+                    <LinkDesignerBuilderElement key={element.id} element={element} />
+                  ))}
+                </SortableContext>
+                
               </div>
             )}
           </div>

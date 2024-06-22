@@ -6,7 +6,7 @@ import { useRouter } from "next/navigation";
 import { LinkProjectSchema, LinkProjectType } from "@/schema/linkProject.schema";
 import { SkeletonLoader } from "@/components/loader/skeleton-loader";
 import { onGetLinkProjectPage } from "@/actions/linkProjecs";
-import LinkProjectCard from "@/components/builder/link-project-card";
+import LinkProjectCard from "@/components/link-designer/link-project-card";
 
 
 const LinkProjectListPage = () => {

@@ -7,7 +7,8 @@ import React, { useState } from "react";
 import { Button } from "../ui/button";
 import { BiSolidTrash } from "react-icons/bi";
 import { cn } from "@/lib/utils";
-
+import { useSortable } from '@dnd-kit/sortable';
+import { CSS } from '@dnd-kit/utilities';
 // link-designer-builder-element
 const LinkDesignerBuilderElement = ({ element }: { element: FormElementInstance }) => {
     const { removeElement, selectedElement, setSelectedElement } = useLinkDesigner();
@@ -30,25 +31,50 @@ const LinkDesignerBuilderElement = ({ element }: { element: FormElementInstance 
         isBottomLinkDesignerBuilderElement: true,
       },
     });
-  
-    const draggable = useDraggable({
-      id: element.id + "-drag-handler",
+
+
+    const {
+      attributes,
+      listeners,
+      setNodeRef,
+      transform,
+      transition,
+      isDragging,
+    } = useSortable({
+      id: element.id,
       data: {
         type: element.type,
         elementId: element.id,
         isLinkDesignerBuilderElement: true,
       },
     });
+    const style = {
+      transform: CSS.Transform.toString(transform),
+      transition,
+      opacity: isDragging ? 0.5 : 1, // 设置拖动时的透明度
+    };
+    // const draggable = useDraggable({
+    //   id: element.id + "-drag-handler",
+    //   data: {
+    //     type: element.type,
+    //     elementId: element.id,
+    //     isLinkDesignerBuilderElement: true,
+    //   },
+    // });
   
-    if (draggable.isDragging) return null; // temporary remove the element from designer
+    // if (draggable.isDragging) return null; // temporary remove the element from designer
   
     const DesignerElement = FormElements[element.type].designerComponent;
 
     return (
       <div
-        ref={draggable.setNodeRef}
-        {...draggable.listeners}
-        {...draggable.attributes}
+        // ref={draggable.setNodeRef}
+        // {...draggable.listeners}
+        // {...draggable.attributes}
+        ref={setNodeRef}
+        {...listeners}
+        {...attributes}
+        style={style}
         className="relative h-[120px] flex flex-col text-foreground hover:cursor-pointer rounded-md ring-1 ring-accent ring-inset"
         onMouseEnter={() => {
           setMouseIsOver(true);
