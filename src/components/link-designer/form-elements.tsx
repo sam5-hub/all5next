@@ -18,6 +18,7 @@ import { TwitterFieldFormElement } from "@/components/fileds/TwitterField";
 import { TiktokFieldFormElement } from "@/components/fileds/TiktokField";
 import { GithubFieldFormElement } from "@/components/fileds/GithubField";
 import { YoutubeFieldFormElement } from "@/components/fileds/YoutubeField";
+import { DateFieldFormElement } from "../fileds/DateField";
 
 export type ElementsType =
   | "FacebookField"
@@ -35,7 +36,7 @@ export type ElementsType =
   // | "SpacerField"
   // | "NumberField"
   // | "TextAreaField"
-  // | "DateField"
+  | "DateField"
   // | "SelectField"
   // | "CheckboxField";
 
@@ -92,7 +93,7 @@ export const FormElements: FormElementsType = {
   // SpacerField: SpacerFieldFormElement,
   // NumberField: NumberFieldFormElement,
   // TextAreaField: TextAreaFormElement,
-  // DateField: DateFieldFormElement,
+  DateField: DateFieldFormElement,
   // SelectField: SelectFieldFormElement,
   // CheckboxField: CheckboxFieldFormElement,
 };

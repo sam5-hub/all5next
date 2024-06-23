@@ -8,9 +8,11 @@ import { idGenerator } from "@/lib/idGenerator";
 import LinkDesignerBuilderElement from "./link-designer-builder-element";
 import { ElementsType, FormElements } from "./form-elements";
 import { arrayMove, SortableContext, verticalListSortingStrategy } from '@dnd-kit/sortable';
+import { LinkDesignerHeader } from "./link-designer-header";
 
 function LinkDesignerBuilder({ linkProjectId }: { linkProjectId: string }) {
-  const { elements, setElements, addElement, selectedElement, setSelectedElement, removeElement } = useLinkDesigner();
+  const { elements, setElements, addElement, selectedElement, setSelectedElement, removeElement, setThemeColor, themeColor } = useLinkDesigner();
+
   const droppable = useDroppable({
     id: "link-designer-builder-drop-area",
     data: {
@@ -133,6 +135,9 @@ function LinkDesignerBuilder({ linkProjectId }: { linkProjectId: string }) {
           droppable.isOver && "ring-4 ring-primary ring-inset",
         )}
       >
+
+
+        <LinkDesignerHeader linkProjectId={linkProjectId}/>
         {!droppable.isOver && elements.length === 0 && (
           <p className="text-3xl text-muted-foreground flex flex-grow items-center font-bold">Drop here</p>
         )}
@@ -142,8 +147,11 @@ function LinkDesignerBuilder({ linkProjectId }: { linkProjectId: string }) {
             <div className="h-[120px] rounded-md bg-primary/20"></div>
           </div>
         )}
+
+        
+
         {elements.length > 0 && (
-          <div className="flex flex-col  w-full gap-2 p-4">
+          <div className="flex flex-col w-full gap-2 p-4">
             <SortableContext items={elements} strategy={verticalListSortingStrategy}>
               {elements.map((element) => (
                 <LinkDesignerBuilderElement key={element.id} element={element} />

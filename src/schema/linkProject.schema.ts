@@ -6,7 +6,11 @@ export type LinkProjectType = {
   title: string;
   imageUrl: string;
   type?: string;
-  content: string;
+  content?: string;
+  socialLinks?: string;
+  theme?: string;
+  description?: string;
+  shareURL?: string;
   createdAt?: Date;
   updatedAt?: Date;
   userId?: string;
@@ -23,6 +27,7 @@ export const LinkProjectSchema = z.object({
   title: z.string(),
   imageUrl: z.string().optional(),
   type: z.string().optional(),
+  content: z.string().optional(),
   createdAt: z.date(),
   updatedAt: z.date(),
   userId: z.string().uuid().optional(),

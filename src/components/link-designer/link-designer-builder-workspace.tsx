@@ -5,7 +5,7 @@ import { DndContext, MouseSensor, TouchSensor, useSensor, useSensors } from "@dn
 import { ImSpinner2 } from "react-icons/im";
 import { Input } from "@/components/ui/input";
 import { Button } from "@/components/ui/button";
-import { toast } from "@/components/ui/use-toast";
+import { toast, useToast } from "@/components/ui/use-toast";
 import Link from "next/link";
 import { BsArrowLeft, BsArrowRight } from "react-icons/bs";
 import Confetti from "react-confetti";
@@ -24,10 +24,32 @@ import {
 import { LinkDesginerMobilePreview } from '@/components/link-designer/link-desginer-mobile-preview';
 import LinkDesignerSidebar from "./link-designer-sidebar";
 import ColorPicker from "../global/color-picker";
+import { onGetLinkProjectData } from "@/actions/linkProjecs";
+import { useRouter } from "next/navigation";
+import { usePathname } from "next/navigation";
 // link-designer-builder-workspace
-function LinkDesignerBuilderWorkspace({ linkProjectData }: { linkProjectData: LinkProjectType }) {
-  const { setElements, setSelectedElement, setThemeColor, themeColor } = useLinkDesigner();
-  const [isReady, setIsReady] = useState(false);
+function LinkDesignerBuilderWorkspace({ linkProjectId }: { linkProjectId: string }) {
+  const { toast } = useToast()
+  const router = useRouter()
+  const pathname = usePathname();
+
+  const [loading, setLoading] = useState<boolean>(false)
+  const { setElements, setSelectedElement, setThemeColor, themeColor, linkProjectInfo, setLinkProjectInfo } = useLinkDesigner();
+  const getGetLinkProjectData = async () => {
+    if (linkProjectId) {
+      setLoading(true);
+      const responseData = await onGetLinkProjectData(linkProjectId);
+      if (responseData && responseData.data) {
+        console.log("setLinkProjectInfo data", responseData);
+        setLoading(false);
+        setLinkProjectInfo(responseData.data as LinkProjectType);
+      }
+    }
+  };
+
+  useEffect(() => {
+    getGetLinkProjectData();
+  }, []);
 
   const mouseSensor = useSensor(MouseSensor, {
     activationConstraint: {
@@ -44,26 +66,6 @@ function LinkDesignerBuilderWorkspace({ linkProjectData }: { linkProjectData: Li
 
   const sensors = useSensors(mouseSensor, touchSensor);
 
-  //   useEffect(() => {
-  //     if (isReady) return;
-  //     const elements = JSON.parse("{}") //linkProjectData.content
-  //     setElements(elements);
-  //     setSelectedElement(null);
-  //     const readyTimeout = setTimeout(() => setIsReady(true), 500);
-  //     return () => clearTimeout(readyTimeout);
-  //   }, [linkProjectData, setElements, isReady, setSelectedElement]);
-
-  //   if (!isReady) {
-  //     return (
-  //       <div className="flex flex-col items-center justify-center w-full h-full">
-  //         <ImSpinner2 className="animate-spin h-12 w-12" />
-  //       </div>
-  //     );
-  //   }
-
-  //   const shareUrl = `${window.location.origin}/submit/${form.shareURL}`;
-
-
   return (
     <DndContext sensors={sensors}>
       <ResizablePanelGroup
@@ -72,7 +74,7 @@ function LinkDesignerBuilderWorkspace({ linkProjectData }: { linkProjectData: Li
       >
 
         <ResizablePanel defaultSize={12}>
-        <LinkDesignerSidebar />
+          <LinkDesignerSidebar />
 
         </ResizablePanel>
         <ResizableHandle withHandle />
@@ -82,21 +84,16 @@ function LinkDesignerBuilderWorkspace({ linkProjectData }: { linkProjectData: Li
             <nav className="flex justify-between border-b-2 p-4 gap-3 items-center">
               <h2 className="truncate font-medium">
                 <span className="text-muted-foreground mr-2">Link Projec :</span>
-                {linkProjectData.title}
+                {linkProjectInfo?.title}
               </h2>
               <div className="flex items-center gap-2">
+                <Button variant={"outline"} onClick={() => { getGetLinkProjectData() }}> Refresh </Button>
                 <LinkPreviewButton />
-                <LinkSaveButton id={linkProjectData.linkProjectId} />
-                <LinkPublishButton id={linkProjectData.linkProjectId} />
+                <LinkSaveButton linkProjectId={linkProjectInfo?.linkProjectId} />
+                {/* <LinkPublishButton linkProjectId={linkProjectInfo?.linkProjectId} /> */}
               </div>
             </nav>
             <div className="flex flex-col pt-10 h-screen w-full items-center justify-start relative overflow-y-auto bg-accent bg-[url(/builder/paper.svg)] dark:bg-[url(/builder/paper-dark.svg)]">
-
-              <ColorPicker onCallback ={(hex)=> {
-                console.log("ColorPicker hex",hex);
-                setThemeColor(hex);
-              }}/>
-              
               <LinkDesignerBuilder linkProjectId="A01" />
             </div>
           </main>

@@ -47,11 +47,16 @@ model LinkProject {
   title      String
   type   String?
   imageUrl   String?
+  description String?   @default("")
+  theme       String?
+  content     String   @default("[]")
+  shareURL   String?   
+  socialLinks  String   @default("[]")
+
   createdAt  DateTime @default(now())
   updatedAt  DateTime @updatedAt
   userId     String?
   user       User?    @relation(fields: [userId], references: [id])
-
   links     Link[]
   
 }
@@ -62,7 +67,7 @@ model Link {
   type   String?
   url   String?
   imageUrl   String?
-  content    String?
+  content    String @default("[]")
   sort   Int?
   createdAt  DateTime @default(now())
   updatedAt  DateTime @updatedAt

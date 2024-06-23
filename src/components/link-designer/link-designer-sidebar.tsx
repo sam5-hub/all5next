@@ -37,6 +37,7 @@ function FormElementsSidebar() {
   
           <p className="text-sm text-muted-foreground col-span-1 md:col-span-2 my-2 place-self-start">Form elements</p>
           <LinkDesignerSidebarItem formElement={FormElements.TextField} />
+          <LinkDesignerSidebarItem formElement={FormElements.DateField} />
           {/* <SidebarBtnElement formElement={FormElements.NumberField} />
           <SidebarBtnElement formElement={FormElements.TextAreaField} />
           <SidebarBtnElement formElement={FormElements.DateField} />

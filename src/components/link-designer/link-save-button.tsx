@@ -6,14 +6,18 @@ import { toast } from "@/components/ui/use-toast";
 import { HiSaveAs } from "react-icons/hi";
 import { FaSpinner } from "react-icons/fa";
 
-function LinkSaveButton({ id }: { id: string }) {
+function LinkSaveButton({ linkProjectId }: { linkProjectId?: string }) {
   const { elements } = useLinkDesigner();
   const [loading, startTransition] = useTransition();
 
+
   const updateFormContent = async () => {
     try {
+      if (!linkProjectId) {
+        return;
+      }
       const jsonElements = JSON.stringify(elements);
-      await UpdateLinkDesignContent(id, jsonElements);
+      await UpdateLinkDesignContent(linkProjectId, jsonElements);
       toast({
         title: "Success",
         description: "Your form has been saved",

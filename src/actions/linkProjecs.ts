@@ -84,6 +84,10 @@ export const onGetLinkProjectData = async (linkProjectId: string) => {
           linkProjectId: true,
           title: true,
           imageUrl: true,
+          content: true,
+          shareURL: true,
+          socialLinks: true,
+          theme: true,
           links: true,
         },
       })
